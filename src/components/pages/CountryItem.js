@@ -1,23 +1,13 @@
-import React, { useContext } from 'react';
-import UpcomingByCountry from '../holidays/bycountry/UpcomingByCountry';
-import HolidayContext from '../../context/holiday/holidayContext';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const CountryItem = ({ country: { key, value } }) => {
-  const { getUpcomingByCountry, setTable } = useContext(HolidayContext);
-
   return (
     <tr>
       <td>
-        <button
-          type='button'
-          className='btn btn-outline-secondary'
-          onClick={() => {
-            getUpcomingByCountry({ key });
-            setTable(<UpcomingByCountry />);
-          }}
-        >
+        <Link to={`/countries/${key}`} className='btn btn-outline-secondary'>
           {value}
-        </button>
+        </Link>
       </td>
       <td>{key}</td>
     </tr>

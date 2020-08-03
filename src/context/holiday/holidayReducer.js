@@ -1,9 +1,4 @@
-import {
-  GET_UPCOMING_HOLIDAYS,
-  SET_LOADING,
-  GET_COUNTRIES,
-  SET_TABLE,
-} from '../types';
+import { GET_UPCOMING_HOLIDAYS, SET_LOADING, GET_COUNTRIES } from '../types';
 
 export default (state, action) => {
   switch (action.type) {
@@ -22,12 +17,6 @@ export default (state, action) => {
       return {
         ...state,
         countries: action.payload,
-        loading: false,
-      };
-    case SET_TABLE:
-      return {
-        ...state,
-        table: action.payload,
         loading: false,
       };
     default:

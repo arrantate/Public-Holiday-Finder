@@ -2,20 +2,13 @@ import React, { useReducer } from 'react';
 import axios from 'axios';
 import HolidayContext from './holidayContext';
 import HolidayReducer from './holidayReducer';
-import {
-  GET_UPCOMING_HOLIDAYS,
-  SET_LOADING,
-  GET_COUNTRIES,
-  SET_TABLE,
-} from '../types';
-import UpcomingWorldwide from '../../components/holidays/worldwide/UpcomingWorldwide';
+import { GET_UPCOMING_HOLIDAYS, SET_LOADING, GET_COUNTRIES } from '../types';
 
 const HolidayState = (props) => {
   const initialState = {
     upcomingHolidays: [],
     countries: [],
     loading: false,
-    table: <UpcomingWorldwide />,
   };
 
   const [state, dispatch] = useReducer(HolidayReducer, initialState);
@@ -38,10 +31,8 @@ const HolidayState = (props) => {
   const getUpcomingByCountry = async (countryCode) => {
     setLoading();
 
-    console.log(countryCode);
-
     const res = await axios.get(
-      `https://cors-anywhere.herokuapp.com/https://date.nager.at/Api/v2/NextPublicHolidays/${countryCode.key}`
+      `https://cors-anywhere.herokuapp.com/https://date.nager.at/Api/v2/NextPublicHolidays/${countryCode}`
     );
 
     dispatch({
@@ -64,10 +55,6 @@ const HolidayState = (props) => {
     });
   };
 
-  //setTable
-  const setTable = (tableComponent) =>
-    dispatch({ type: SET_TABLE, payload: tableComponent });
-
   //setLoading
   const setLoading = () => dispatch({ type: SET_LOADING });
 
@@ -81,7 +68,6 @@ const HolidayState = (props) => {
         getUpcomingWorldwide,
         getUpcomingByCountry,
         getCountries,
-        setTable,
       }}
     >
       {props.children}

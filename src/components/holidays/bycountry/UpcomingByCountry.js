@@ -1,12 +1,17 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import UpcomingItem from './UpcomingItem';
 import HolidayContext from '../../../context/holiday/holidayContext';
 import Spinner from '../../layout/Spinner';
 
-const UpcomingByCountry = () => {
+const UpcomingByCountry = ({ match }) => {
   const { loading, upcomingHolidays, getUpcomingByCountry } = useContext(
     HolidayContext
   );
+
+  useEffect(() => {
+    getUpcomingByCountry(match.params.country);
+    // eslint-disable-next-line
+  }, []);
 
   if (loading === true) {
     return <Spinner />;
